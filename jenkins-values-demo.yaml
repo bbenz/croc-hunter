@@ -2,8 +2,8 @@
 # To install on your own cluster, run:
 # helm --namespace jenkins --name jenkins -f ./jenkins-values.yaml install stable/jenkins
 
-Master:
-  ImageTag: "2.121.3"
+master:
+  imageTag: "2.176.2"
   resources:
     requests:
       cpu: "50m"
@@ -11,7 +11,7 @@ Master:
     limits:
       cpu: "2000m"
       memory: "2048Mi"
-  #HostName: walkthrough.demo.az.jessicadeen.com
+  HostName: jenkins.bb.az.jessicadeen.com
   ServiceType: ClusterIP
   ServicePort: 8080
   InstallPlugins:
@@ -25,7 +25,7 @@ Master:
       - ghprb:1.42.0
       - blueocean:1.8.2
       - artifactory:2.16.2
-      - tfs:5.139.2
+      - tfs:5.142.0
 
   ScriptApproval:
     - "method groovy.json.JsonSlurperClassic parseText java.lang.String"
@@ -40,22 +40,21 @@ Master:
     ApiVersion: extensions/v1beta1
     Annotations:
       kubernetes.io/ingress.class: nginx
-      kubernetes.io/tls-acme: "true"
-      certmanager.k8s.io/cluster-issuer: letsencrypt-prod
-      ingress.kubernetes.io/secure-backends: "true"
+      # kubernetes.io/tls-acme: "true"
+      # certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+      # ingress.kubernetes.io/secure-backends: "true"
 
- #   TLS:
- #     - secretName: walkthrough.demo.az.jessicadeen.com
- #       hosts:
- #         - walkthrough.demo.az.jessicadeen.com
+  #  TLS:
+  #    - secretName: jenkins.bb.az.jessicadeen.com
+  #      hosts:
+  #        - jenkins.bb.az.jessicadeen.com
 
-Agent:
-  Enabled: false
+# Agent:
+#   Enabled: false
 
 rbac:
-  install: true
-  serviceAccountName: default
+  create: true
+  serviceAccount:
+    name: default
   # RBAC api version (currently either v1beta1 or v1alpha1)
   apiVersion: v1beta1
-  # Cluster role reference
-  roleRef: cluster-admin
