@@ -20,4 +20,5 @@ RUN cd $GOPATH/src/github.com/bbenz/croc-hunter && go install -v .
 
 CMD ["croc-hunter"]
 
+#runs on 8080
 EXPOSE 8080
