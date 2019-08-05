@@ -11,7 +11,7 @@ Master:
     limits:
       cpu: "2000m"
       memory: "2048Mi"
-  HostName: walkthrough.demo.az.jessicadeen.com
+  #HostName: walkthrough.demo.az.jessicadeen.com
   ServiceType: ClusterIP
   ServicePort: 8080
   InstallPlugins:
@@ -44,10 +44,10 @@ Master:
       certmanager.k8s.io/cluster-issuer: letsencrypt-prod
       ingress.kubernetes.io/secure-backends: "true"
 
-    TLS:
-      - secretName: walkthrough.demo.az.jessicadeen.com
-        hosts:
-          - walkthrough.demo.az.jessicadeen.com
+ #   TLS:
+ #     - secretName: walkthrough.demo.az.jessicadeen.com
+ #       hosts:
+ #         - walkthrough.demo.az.jessicadeen.com
 
 Agent:
   Enabled: false
